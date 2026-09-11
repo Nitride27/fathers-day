@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { getScroller, initGsap } from "@/lib/gsapConfig";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { FlowerIcon, MountainIcon } from "@/components/ui/EphemeraIcons";
 
 const EVENT = "buwa:intro-complete";
 
@@ -19,17 +20,31 @@ function dispatchComplete() {
 export default function FoldedEnvelope() {
   const root = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useLayoutEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useLayoutEffect(() => {
     if (reduced) {
       dispatchComplete();
       return;
     }
-    // Pre-emptively disable snap BEFORE ScrollTrigger inserts the pin
-    // spacer: spacer insertion shifts snap geometry and mandatory snap
-    // re-snaps to Hero during refresh, before onToggle ever fires.
-    const scrollerEl = getScroller();
-    if (scrollerEl instanceof HTMLElement) scrollerEl.classList.add("no-snap");
+    const mobile = window.matchMedia("(max-width: 768px)").matches;
+    // Mobile gets stacked snap cards with NO pin, so mandatory snap keeps
+    // working (one scroll = one card). Only desktop disables snap for pinning.
+    if (mobile) {
+      const sc = getScroller();
+      if (sc instanceof HTMLElement) sc.classList.remove("no-snap");
+    } else {
+      const scrollerEl = getScroller();
+      if (scrollerEl instanceof HTMLElement) scrollerEl.classList.add("no-snap");
+    }
     const { gsap, ScrollTrigger } = initGsap();
     const ctx = gsap.context(() => {
       const q = gsap.utils.selector(root.current);
@@ -53,42 +68,35 @@ export default function FoldedEnvelope() {
       const syncSnap = (self: { isActive: boolean }) => setSnap(self.isActive);
 
       if (isMobile) {
-        // Simplified 2D fold: envelope lifts, panels slide/fade, final settles.
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: root.current,
-            scroller: getScroller(),
-            start: "top top",
-            end: "+=150%",
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1,
-            onLeave: dispatchComplete,
-            onLeaveBack: () => {},
-            onToggle: syncSnap,
-            onRefresh: syncSnap,
-          },
+        // Mobile: NO pin (pin + touch snap fight and break). Three stacked
+        // snap cards animate in on enter; targets are document-selected
+        // elements so context scoping can't hide them.
+        const cards = Array.from(document.querySelectorAll(".mobile-card"));
+        cards.forEach((el, i) => {
+          gsap.fromTo(
+            el,
+            { y: 50, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                scroller: getScroller(),
+                start: "top 80%",
+                once: true,
+                onEnter: () => {
+                  if (i === cards.length - 1) dispatchComplete();
+                },
+              },
+            }
+          );
         });
-        tl.to(".twine-wrap", { opacity: 0, y: -30, duration: 0.6 }, 0);
-        tl.fromTo(
-          ".fold-panel",
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.25, duration: 1, ease: "power2.out" },
-          0.3
-        );
-        tl.fromTo(
-          ".fold-final",
-          { y: 60, opacity: 0, scale: 0.96 },
-          { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" },
-          1.1
-        );
-        tl.to(".fold-sealed", { opacity: 0, y: -60, duration: 0.8 }, 1.2);
-        tl.to(".fold-hint", { opacity: 0, duration: 0.4 }, 1.6);
-        tl.add(dispatchComplete, 1.9);
+        if (cards.length === 0) dispatchComplete();
         return () => {
-          setSnap(false);
-          tl.scrollTrigger?.kill();
-          tl.kill();
+          const sc = getScroller();
+          if (sc instanceof HTMLElement) sc.classList.remove("no-snap");
         };
       }
 
@@ -142,7 +150,7 @@ export default function FoldedEnvelope() {
       const sc = getScroller();
       if (sc instanceof HTMLElement) sc.classList.remove("no-snap");
     };
-  }, [reduced]);
+  }, [reduced, isMobile]);
 
   if (reduced) {
     return (
@@ -155,6 +163,38 @@ export default function FoldedEnvelope() {
           </figcaption>
         </figure>
       </div>
+    );
+  }
+
+  if (isMobile) {
+    return (
+      <>
+        <div data-snap className="relative flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-cream px-6 py-16">
+          <div className="mobile-card grid w-full max-w-xs place-items-center rounded-sm bg-paper px-6 py-14 shadow-[0_24px_60px_rgba(42,38,34,0.25)]">
+            <span className="font-serif text-2xl tracking-[0.3em] opacity-40">BUWA</span>
+            <span className="mt-2 text-[11px] uppercase tracking-[0.25em] text-maroon">tied with love</span>
+          </div>
+          <p className="font-hand text-xl">A lifetime of love, folded in moments.</p>
+          <p className="text-[11px] font-semibold tracking-[0.3em] opacity-60">SCROLL ↓</p>
+        </div>
+        <div data-snap className="relative flex min-h-[100dvh] flex-col items-center justify-center gap-5 bg-cream px-6 py-16">
+          <div className="mobile-card w-full max-w-xs rounded-sm bg-[#EADFC6] p-6 text-center shadow-xl">
+            <FlowerIcon className="mx-auto h-8 w-8 text-maroon" />
+            <p className="mt-2 font-hand text-2xl">Dad — thank you for everything</p>
+          </div>
+          <div className="mobile-card w-full max-w-xs rounded-sm bg-[#E4D5B4] p-6 text-center shadow-xl">
+            <MountainIcon className="mx-auto h-8 w-8 opacity-60" />
+            <p className="mt-2 font-serif text-sm tracking-[0.25em] opacity-60">KUSHE AUNSI • 2083</p>
+          </div>
+        </div>
+        <div data-snap className="relative flex min-h-[100dvh] items-center justify-center bg-cream px-6 py-16">
+          <figure className="mobile-card polaroid tape w-full max-w-xs rotate-1 p-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="images/fold-final.jpg?v=2" alt="Open letter of gratitude for Buwa" className="h-auto w-full object-cover" />
+            <figcaption className="px-2 py-3 font-hand text-2xl">Same mountains, new dreams. Thank you, Buwa.</figcaption>
+          </figure>
+        </div>
+      </>
     );
   }
 
@@ -189,17 +229,20 @@ export default function FoldedEnvelope() {
         {/* 4 flaps */}
         <div className="fold-flap fold-left fold-panel absolute inset-y-0 left-0 z-10 w-1/2 overflow-hidden rounded-sm bg-[#E7DCC3] shadow-xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="images/fold-panel-a.jpg?v=2" alt="" aria-hidden className="h-full w-full object-cover opacity-90" />
+          <img src="images/fold-panel-a.jpg?v=2" alt="" aria-hidden className="h-full w-full object-cover object-top opacity-90" />
         </div>
         <div className="fold-flap fold-right fold-panel absolute inset-y-0 right-0 z-10 w-1/2 overflow-hidden rounded-sm bg-[#EFE3C8] shadow-xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="images/fold-panel-b.jpg" alt="" aria-hidden className="h-full w-full object-cover opacity-90" />
+          <img src="images/fold-panel-b.jpg" alt="" aria-hidden className="h-full w-full object-cover object-top opacity-90" />
         </div>
-        <div className="fold-flap fold-top fold-panel absolute inset-x-0 top-0 z-10 h-1/2 overflow-hidden bg-[#EADFC6]">
-          <span className="grid h-full place-items-center font-hand text-2xl">Dad — thank you for everything</span>
+        <div className="fold-flap fold-top fold-panel absolute inset-x-0 top-0 z-10 flex h-1/2 flex-col items-center justify-center gap-2 overflow-hidden bg-[#EADFC6] px-6 text-center">
+          <FlowerIcon className="h-8 w-8 text-maroon" />
+          <span className="font-hand text-2xl md:text-3xl">Dad — thank you for everything</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] opacity-50">folded with love</span>
         </div>
-        <div className="fold-flap fold-bottom fold-panel absolute inset-x-0 bottom-0 z-10 h-1/2 overflow-hidden bg-[#E4D5B4]">
-          <span className="grid h-full place-items-center font-serif text-sm tracking-[0.25em] opacity-60">KUSHE AUNSI • 2083</span>
+        <div className="fold-flap fold-bottom fold-panel absolute inset-x-0 bottom-0 z-10 flex h-1/2 flex-col items-center justify-center gap-2 overflow-hidden bg-[#E4D5B4] px-6 text-center">
+          <MountainIcon className="h-8 w-8 opacity-60" />
+          <span className="font-serif text-sm tracking-[0.25em] opacity-60">KUSHE AUNSI • 2083</span>
         </div>
 
         {/* final reveal */}

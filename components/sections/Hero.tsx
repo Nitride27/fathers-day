@@ -80,11 +80,11 @@ export default function Hero() {
           <div aria-hidden className="parallax-fast absolute left-[54%] top-[1%] z-10 -rotate-12 text-maroon">
             <FlowerIcon className="h-16 w-16 drop-shadow-md" />
           </div>
-          <figure className="parallax-fast absolute right-[1%] top-[22%] w-[42%] rotate-2 bg-white p-2 shadow-xl">
+          <figure className="parallax-fast absolute right-[3%] top-[13%] w-[40%] rotate-2 bg-white p-2 shadow-xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="images/hero-village.jpg?v=2"               alt="Spinning a prayer wheel at the monastery" className="h-auto w-full bg-gradient-to-br from-stone-300 to-amber-200 object-cover" />
           </figure>
-          <figure className="parallax-slow absolute bottom-[14%] right-[9%] w-[44%] -rotate-1 bg-white p-2 shadow-xl">
+          <figure className="parallax-slow absolute bottom-[9%] right-[9%] w-[44%] -rotate-1 bg-white p-2 shadow-xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="images/hero-pagoda.jpg" alt="Pagoda temple draped in prayer flags" className="h-auto w-full bg-gradient-to-br from-emerald-200 to-stone-300 object-cover" />
           </figure>
