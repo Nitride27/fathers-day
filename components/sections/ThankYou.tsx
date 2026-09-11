@@ -51,7 +51,7 @@ export default function ThankYou() {
       <div className="sunset-bg absolute inset-0 bg-gradient-to-b from-[#7A1E12] via-[#B23A1D] to-[#2A0F0C]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="images/thank-you-sunset.jpg"
+          src="images/thank-you-sunset-v2.jpg"
           alt=""
           aria-hidden
           loading="lazy"

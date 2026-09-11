@@ -64,13 +64,20 @@ export default function MusicToggle() {
     const opts: AddEventListenerOptions = { once: true, passive: true };
     window.addEventListener("pointerdown", fadeIn, opts);
     window.addEventListener("keydown", fadeIn, opts);
+    window.addEventListener("touchstart", fadeIn, opts);
     window.addEventListener("touchend", fadeIn, opts);
     window.addEventListener("scroll", fadeIn, opts);
+    const onVis = () => {
+      if (document.visibilityState === "visible") fadeIn();
+    };
+    document.addEventListener("visibilitychange", onVis);
     return () => {
       window.removeEventListener("pointerdown", fadeIn);
       window.removeEventListener("keydown", fadeIn);
+      window.removeEventListener("touchstart", fadeIn);
       window.removeEventListener("touchend", fadeIn);
       window.removeEventListener("scroll", fadeIn);
+      document.removeEventListener("visibilitychange", onVis);
     };
   }, [fadeIn]);
 

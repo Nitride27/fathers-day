@@ -90,7 +90,7 @@ export default function Hero() {
           </figure>
           <figure className="parallax-fast absolute bottom-0 left-[6%] w-[52%] rotate-1 bg-white p-2 shadow-xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="images/hero-mountains.jpg"               alt="Hilltop road above the valley" className="h-auto w-full bg-gradient-to-br from-sky-300 to-indigo-200 object-cover" />
+                        <img src="images/hero-mountains-v2.jpg" alt="Hilltop road above the valley" className="h-auto w-full bg-gradient-to-br from-sky-300 to-indigo-200 object-cover" />
           </figure>
         </div>
       </div>
