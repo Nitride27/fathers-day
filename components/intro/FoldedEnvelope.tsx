@@ -69,10 +69,10 @@ export default function FoldedEnvelope() {
         scrollTrigger: {
           trigger: root.current,
           scroller: getScroller(),
-          start: "top top",
-          end: "+=250%",
+          start: phone ? "top bottom" : "top top",
+          end: phone ? "bottom top" : "+=250%",
           scrub: 1,
-          pin: true,
+          pin: !phone,
           anticipatePin: 1,
           onLeave: dispatchComplete,
           onToggle: syncSnap,
@@ -83,8 +83,12 @@ export default function FoldedEnvelope() {
       tl.to(".twine-path", { strokeDashoffset: 0, duration: 0.8, ease: "none" }, 0);
       tl.to(".twine-wrap", { opacity: 0, scale: 1.2, duration: 0.4 }, 0.7);
       if (phone) {
-        tl.to(".fold-left", { rotationX: -150, duration: 1, ease: "power2.inOut" }, 0.8);
-        tl.to(".fold-right", { rotationX: 150, duration: 1, ease: "power2.inOut" }, 0.9);
+        // Phones skip 3D entirely: top photo exits upward, bottom photo
+        // exits downward (2D slide + fade), revealing the note layer;
+        // the finale then settles over everything. Nothing can vanish
+        // mid-turn because nothing rotates.
+        tl.to(".fold-left", { yPercent: -75, opacity: 0, duration: 1, ease: "power2.inOut" }, 0.3);
+        tl.to(".fold-right", { yPercent: 75, opacity: 0, duration: 1, ease: "power2.inOut" }, 0.4);
       } else {
         tl.to(".fold-left", { rotationY: -155, duration: 1, ease: "power2.inOut" }, 0.8);
         tl.to(".fold-right", { rotationY: 155, duration: 1, ease: "power2.inOut" }, 0.9);

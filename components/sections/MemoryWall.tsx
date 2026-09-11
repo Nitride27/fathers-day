@@ -27,6 +27,8 @@ const MEMORIES: MemoryCard[] = [
   { src: "images/album-home.jpg?v=2", caption: "Home together", rotate: "-1.5deg", gradient: "from-amber-200 to-stone-200", pos: "object-top" },
   { src: "images/album-heritage.jpg?v=2", caption: "Heritage day", rotate: "2deg", gradient: "from-stone-300 to-amber-100" },
   { src: "images/album-farm.jpg?v=2", caption: "Farm adventures", rotate: "-2deg", gradient: "from-emerald-200 to-amber-200" },
+  { src: "images/memory-family.jpeg", caption: "Family celebrations", rotate: "1.5deg", gradient: "from-red-100 to-amber-100" },
+  { src: "images/memory-old-days.jpeg", caption: "Where it all began", rotate: "-1deg", gradient: "from-amber-200 to-stone-300", pos: "object-top" },
 ];
 
 export default function MemoryWall() {

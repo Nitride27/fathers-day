@@ -132,6 +132,10 @@ body {
     width: 78vmin;
     height: 58vmin;
   }
+  /* Finale sits above the note layer (2D phone flow has no flap fade). */
+  .fold-stage .fold-final {
+    z-index: 20;
+  }
   /* Lock touch to vertical scrolling only — no sideways drift. */
   html,
   body,

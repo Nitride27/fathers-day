@@ -28,11 +28,11 @@ export default function Nav() {
         aria-label="Primary"
         className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4"
       >
-        <a href="#top" className="font-serif text-xl font-black tracking-tight">
+        <a href="#top" className="shrink-0 font-serif text-xl font-black tracking-tight">
           BUWA<span className="text-maroon">.</span>
           <span className="mt-0.5 block h-[2px] w-8 bg-maroon" aria-hidden />
         </a>
-        <ul className="hidden gap-6 text-[11px] font-semibold tracking-[0.18em] sm:flex">
+        <ul className="flex gap-4 overflow-x-auto text-[10px] font-semibold tracking-[0.18em] sm:gap-6 sm:text-[11px]">
           {[
             ["Stories", "#stories"],
             ["Letters", "#letters"],
@@ -40,19 +40,13 @@ export default function Nav() {
             ["Memories", "#memories"],
             ["About", "#about"],
           ].map(([label, href]) => (
-            <li key={href}>
-              <a href={href} className="opacity-70 transition hover:text-maroon hover:opacity-100">
+            <li key={href} className="shrink-0">
+              <a href={href} className="whitespace-nowrap opacity-70 transition hover:text-maroon hover:opacity-100">
                 {label.toUpperCase()}
               </a>
             </li>
           ))}
         </ul>
-        <a
-          href="#memories"
-          className="sm:hidden text-[11px] font-semibold tracking-[0.18em] opacity-70"
-        >
-          MEMORIES
-        </a>
       </nav>
     </header>
   );
