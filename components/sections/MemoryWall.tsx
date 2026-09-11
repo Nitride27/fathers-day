@@ -6,12 +6,19 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { loadLocalMemories, type LocalMemory } from "@/lib/local-memories";
 
 const MEMORIES = [
-  { src: "images/memory-first-day.jpg", caption: "First school day", rotate: "-2deg", gradient: "from-sky-200 to-amber-100" },
-  { src: "images/memory-honesty.jpg", caption: "Learning honesty", rotate: "1.5deg", gradient: "from-amber-100 to-stone-300" },
-  { src: "images/memory-trips.jpg", caption: "Family trips", rotate: "-1deg", gradient: "from-sky-300 to-emerald-100" },
-  { src: "images/memory-festivals.jpg", caption: "Festivals", rotate: "2deg", gradient: "from-rose-200 to-amber-100" },
-  { src: "images/memory-hard-work.jpg", caption: "Hard work", rotate: "-1.5deg", gradient: "from-amber-200 to-emerald-200" },
-  { src: "images/memory-simple-joys.jpg", caption: "Simple joys", rotate: "1deg", gradient: "from-stone-200 to-sky-100" },
+  { src: "images/memory-first-day.jpg", caption: "Quiet evenings at home", rotate: "-2deg", gradient: "from-sky-200 to-amber-100" },
+  { src: "images/memory-honesty.jpg", caption: "Blessings and lessons", rotate: "1.5deg", gradient: "from-amber-100 to-stone-300" },
+  { src: "images/memory-trips.jpg", caption: "Road trips together", rotate: "-1deg", gradient: "from-sky-300 to-emerald-100" },
+  { src: "images/memory-festivals.jpg", caption: "Festival nights", rotate: "2deg", gradient: "from-rose-200 to-amber-100" },
+  { src: "images/memory-hard-work.jpg", caption: "Working the fields", rotate: "-1.5deg", gradient: "from-amber-200 to-emerald-200" },
+  { src: "images/memory-simple-joys.jpg", caption: "Birthday celebrations", rotate: "1deg", gradient: "from-stone-200 to-sky-100" },
+  { src: "images/album-amma-buwa.jpg", caption: "Amma & Buwa", rotate: "-1deg", gradient: "from-amber-100 to-rose-200" },
+  { src: "images/album-dashain.jpg", caption: "Dashain tika", rotate: "2deg", gradient: "from-red-200 to-amber-100" },
+  { src: "images/album-at-rest.jpg", caption: "At rest", rotate: "-2deg", gradient: "from-stone-200 to-stone-300" },
+  { src: "images/album-walk.jpg", caption: "Out for a walk", rotate: "1.5deg", gradient: "from-emerald-100 to-sky-200" },
+  { src: "images/album-home.jpg", caption: "Home together", rotate: "-1.5deg", gradient: "from-amber-200 to-stone-200" },
+  { src: "images/album-heritage.jpg", caption: "Heritage day", rotate: "2deg", gradient: "from-stone-300 to-amber-100" },
+  { src: "images/album-farm.jpg", caption: "Farm adventures", rotate: "-2deg", gradient: "from-emerald-200 to-amber-200" },
 ];
 
 export default function MemoryWall() {

@@ -76,7 +76,7 @@ export default function KusheAunsiBand() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="images/kushe-aunsi-pagoda-sunset.jpg"
-              alt="Pagoda temple at sunset with prayer flags and mountains"
+              alt="Boudhanath stupa on a bright day"
               loading="lazy"
               className="h-full w-full object-cover"
               onError={(e) => {

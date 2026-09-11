@@ -31,6 +31,18 @@ export default function MusicToggle() {
       /* ignore */
     }
     setReady(true);
+    // Try playing immediately on load. Browsers often block audible
+    // autoplay — in that case we start silent and fade in on first gesture.
+    try {
+      if (window.localStorage.getItem(KEY) === "1") return;
+      const h = getHowl();
+      if (!h) return;
+      if (!h.playing()) h.play();
+      h.fade(0, 0.35, 2500);
+      setMuted(false);
+    } catch {
+      /* blocked — gesture fallback below */
+    }
   }, []);
 
   const fadeIn = useCallback(() => {
@@ -52,9 +64,13 @@ export default function MusicToggle() {
     const opts: AddEventListenerOptions = { once: true, passive: true };
     window.addEventListener("pointerdown", fadeIn, opts);
     window.addEventListener("keydown", fadeIn, opts);
+    window.addEventListener("touchend", fadeIn, opts);
+    window.addEventListener("scroll", fadeIn, opts);
     return () => {
       window.removeEventListener("pointerdown", fadeIn);
       window.removeEventListener("keydown", fadeIn);
+      window.removeEventListener("touchend", fadeIn);
+      window.removeEventListener("scroll", fadeIn);
     };
   }, [fadeIn]);
 

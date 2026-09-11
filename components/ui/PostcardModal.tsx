@@ -187,7 +187,7 @@ export default function PostcardModal({ open, onClose }: { open: boolean; onClos
               <input type="file" accept="image/jpeg,image/png,image/webp" onChange={(e) => onPhoto(e.target.files?.[0])} className="mt-1 w-full text-sm normal-case tracking-normal" />
             </label>
             <div className="flex gap-3">
-              <button type="button" onClick={download} disabled={busy} className="bg-maroon px-5 py-2 text-[11px] font-bold tracking-[0.2em] text-cream hover:bg-maroonDeep disabled:opacity-50">
+              <button type="button" onClick={download} disabled={busy} className="bg-maroon px-5 py-2 text-[11px] font-bold tracking-[0.2em] text-cream hover:bg-maroonDeep disabled:opacity-50 active:scale-95">
                 {busy ? "MAKING…" : "DOWNLOAD PNG"}
               </button>
               <button type="button" onClick={onClose} className="px-4 py-2 text-[11px] tracking-[0.2em] opacity-60 hover:opacity-100">

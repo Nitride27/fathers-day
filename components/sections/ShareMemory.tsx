@@ -157,7 +157,7 @@ export default function ShareMemory() {
                 </label>
                 {error && <p role="alert" className="text-sm text-maroon">{error}</p>}
                 <div className="flex gap-3">
-                  <button type="submit" disabled={saving} className="bg-maroon px-5 py-2 text-[11px] font-bold tracking-[0.2em] text-cream hover:bg-maroonDeep disabled:opacity-50">
+                  <button type="submit" disabled={saving} className="bg-maroon px-5 py-2 text-[11px] font-bold tracking-[0.2em] text-cream hover:bg-maroonDeep disabled:opacity-50 active:scale-95">
                     {saving ? "KEEPING…" : "KEEP THIS STORY"}
                   </button>
                   <button type="button" onClick={() => setOpen(false)} className="px-4 py-2 text-[11px] tracking-[0.2em] opacity-60 hover:opacity-100">

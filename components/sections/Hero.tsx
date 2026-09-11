@@ -63,7 +63,7 @@ export default function Hero() {
           </p>
           <a
             href="#letters"
-            className="hero-fade mt-6 inline-flex items-center gap-3 bg-maroon px-6 py-3 text-[11px] font-bold tracking-[0.2em] text-cream transition hover:bg-maroonDeep"
+            className="hero-fade mt-6 inline-flex items-center gap-3 bg-maroon px-6 py-3 text-[11px] font-bold tracking-[0.2em] text-cream transition hover:bg-maroonDeep active:scale-95"
           >
             EXPLORE STORIES <span aria-hidden>→</span>
           </a>
@@ -90,7 +90,7 @@ export default function Hero() {
           </figure>
           <figure className="parallax-fast absolute bottom-0 left-[6%] w-[52%] rotate-1 bg-white p-2 shadow-xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="images/hero-mountains.jpg" alt="Himalayan mountain panorama" className="h-auto w-full bg-gradient-to-br from-sky-300 to-indigo-200 object-cover" />
+            <img src="images/hero-mountains.jpg"               alt="Hilltop road above the valley" className="h-auto w-full bg-gradient-to-br from-sky-300 to-indigo-200 object-cover" />
           </figure>
         </div>
       </div>
