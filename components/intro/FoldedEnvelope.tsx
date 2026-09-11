@@ -81,12 +81,10 @@ export default function FoldedEnvelope() {
       tl.to(".twine-wrap", { opacity: 0, scale: 1.2, duration: 0.4 }, 0.7);
       tl.to(".fold-cover", { opacity: 0, scale: 1.05, duration: 0.5, ease: "power2.out" }, 0.3);
       if (phone) {
-        // Phones skip 3D entirely: top photo exits upward, bottom photo
-        // exits downward (2D slide + fade), revealing the note layer;
-        // the finale then settles over everything. Nothing can vanish
-        // mid-turn because nothing rotates.
-        tl.to(".fold-left", { yPercent: -75, opacity: 0, duration: 1, ease: "power2.inOut" }, 0.3);
-        tl.to(".fold-right", { yPercent: 75, opacity: 0, duration: 1, ease: "power2.inOut" }, 0.4);
+        // Phones fold the same 3D way as laptop, but top/bottom instead of
+        // left/right (photo flaps are stacked via globals.css).
+        tl.to(".fold-left", { rotationX: -155, duration: 1, ease: "power2.inOut" }, 0.8);
+        tl.to(".fold-right", { rotationX: 155, duration: 1, ease: "power2.inOut" }, 0.9);
       } else {
         tl.to(".fold-left", { rotationY: -155, duration: 1, ease: "power2.inOut" }, 0.8);
         tl.to(".fold-right", { rotationY: 155, duration: 1, ease: "power2.inOut" }, 0.9);
@@ -169,7 +167,7 @@ export default function FoldedEnvelope() {
             Lifts first; the photo flaps unfold inside-out beneath it. */}
         <div className="fold-cover absolute inset-0 z-[19] flex flex-col items-center justify-center gap-3 rounded-sm bg-[#DCC79C] shadow-[0_24px_60px_rgba(42,38,34,0.25)] ring-1 ring-inset ring-[#2A2622]/10">
           <span className="font-serif text-3xl tracking-[0.35em] text-[#2A2622]/75">BUWA.</span>
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-[#8C1D18] shadow-md" aria-hidden>
+          <span className="absolute right-8 top-8 grid h-10 w-10 place-items-center rounded-full bg-[#8C1D18] shadow-md" aria-hidden>
             <FlowerIcon className="h-6 w-6 text-[#F3EEE4]" />
           </span>
           <span className="font-hand text-xl text-[#2A2622]/70">a gift for you</span>
