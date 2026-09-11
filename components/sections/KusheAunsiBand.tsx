@@ -75,8 +75,8 @@ export default function KusheAunsiBand() {
           <div className="kenburns aspect-[4/3] w-full bg-gradient-to-br from-orange-900 via-stone-800 to-amber-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="images/kushe-aunsi-pagoda-sunset.jpg?v=2"
-              alt="Boudhanath stupa on a bright day"
+              src="images/memory-honesty.jpg?v=2"
+              alt="Blessing a child with tika"
               loading="lazy"
               className="h-full w-full object-cover"
               onError={(e) => {

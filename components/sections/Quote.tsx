@@ -76,14 +76,29 @@ export default function Quote() {
           </p>
           <svg viewBox="0 0 400 120" className="mt-6 w-full opacity-70" aria-hidden>
             <path
+              d="M0 108 L40 78 L70 96 L105 60 L140 92 L175 66 L210 94 L245 62 L280 90 L315 68 L350 92 L400 74"
+              fill="none"
+              stroke="#2A2622"
+              strokeWidth="1"
+              opacity="0.35"
+              strokeLinejoin="round"
+            />
+            <path
               className="mountain-path"
-              d="M10 100 L110 30 L160 70 L220 20 L290 80 L330 55 L390 100"
+              d="M5 110 L50 68 L80 92 L125 42 L165 84 L205 56 L245 94 L290 60 L330 90 L395 108"
               fill="none"
               stroke="#2A2622"
               strokeWidth="1.5"
               strokeLinejoin="round"
             />
-            <path d="M90 105 L150 60 L210 105 M230 105 L280 65 L340 105" fill="none" stroke="#2A2622" strokeWidth="1" opacity="0.5" />
+            <path
+              d="M125 42 L138 57 L125 63 L112 57 Z M205 56 L216 68 L205 73 L194 68 Z"
+              fill="none"
+              stroke="#2A2622"
+              strokeWidth="1"
+              opacity="0.6"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
       </div>

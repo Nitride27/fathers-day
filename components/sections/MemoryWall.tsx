@@ -14,7 +14,7 @@ type MemoryCard = {
 };
 
 const MEMORIES: MemoryCard[] = [
-  { src: "images/memory-honesty.jpg?v=2", caption: "Blessings and lessons", rotate: "1.5deg", gradient: "from-amber-100 to-stone-300" },
+  { src: "images/kushe-aunsi-pagoda-sunset.jpg?v=2", caption: "Blessings and lessons", rotate: "1.5deg", gradient: "from-amber-100 to-stone-300" },
   { src: "images/memory-first-day.jpg?v=2", caption: "Quiet evenings at home", rotate: "-2deg", gradient: "from-sky-200 to-amber-100" },
   { src: "images/memory-trips.jpg?v=2", caption: "Road trips together", rotate: "-1deg", gradient: "from-sky-300 to-emerald-100" },
   { src: "images/memory-festivals.jpg?v=2", caption: "Festival nights", rotate: "2deg", gradient: "from-rose-200 to-amber-100" },

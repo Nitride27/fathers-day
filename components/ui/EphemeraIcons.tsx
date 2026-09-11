@@ -35,9 +35,9 @@ export function FlowerIcon({ className }: P) {
 export function MountainIcon({ className }: P) {
   return (
     <Base className={className}>
-      <circle cx="17.5" cy="5.5" r="1.8" />
-      <path d="M2.5 19.5 9 8l3.5 5.5L15 10l6.5 9.5Z" />
-      <path d="M9 8l1.8 2.8L9.4 12.4 7.6 11 9 8Z" fill="currentColor" stroke="none" opacity="0.35" />
+      <circle cx="17.5" cy="5" r="1.8" />
+      <path d="M2.5 19.5 9.5 8l3.5 5 3-3.5 5.5 10Z" />
+      <path d="M9.5 8 11.3 10.4 9.5 11.6 7.7 10.4Z M16 8.5l1.6 1.9-1.6 1.2-1.6-1.2Z" fill="currentColor" stroke="none" opacity="0.3" />
     </Base>
   );
 }

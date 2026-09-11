@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { getScroller, initGsap } from "@/lib/gsapConfig";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { FlowerIcon, MountainIcon } from "@/components/ui/EphemeraIcons";
@@ -20,35 +20,19 @@ function dispatchComplete() {
 export default function FoldedEnvelope() {
   const root = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useLayoutEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    const sync = () => setIsMobile(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
 
   useLayoutEffect(() => {
     if (reduced) {
       dispatchComplete();
       return;
     }
-    const mobile = window.matchMedia("(max-width: 768px)").matches;
-    // Mobile gets stacked snap cards with NO pin, so mandatory snap keeps
-    // working (one scroll = one card). Only desktop disables snap for pinning.
-    if (mobile) {
-      const sc = getScroller();
-      if (sc instanceof HTMLElement) sc.classList.remove("no-snap");
-    } else {
-      const scrollerEl = getScroller();
-      if (scrollerEl instanceof HTMLElement) scrollerEl.classList.add("no-snap");
-    }
+    // Same pinned fold on every screen size, including phones.
+    // While the intro pin owns the scroll range, mandatory snap is off.
+    const scrollerEl = getScroller();
+    if (scrollerEl instanceof HTMLElement) scrollerEl.classList.add("no-snap");
     const { gsap, ScrollTrigger } = initGsap();
     const ctx = gsap.context(() => {
       const q = gsap.utils.selector(root.current);
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
       const twine = q(".twine-path")[0] as unknown as SVGPathElement | undefined;
 
       if (twine) {
@@ -67,39 +51,7 @@ export default function FoldedEnvelope() {
       };
       const syncSnap = (self: { isActive: boolean }) => setSnap(self.isActive);
 
-      if (isMobile) {
-        // Mobile: NO pin (pin + touch snap fight and break). Three stacked
-        // snap cards animate in on enter; targets are document-selected
-        // elements so context scoping can't hide them.
-        const cards = Array.from(document.querySelectorAll(".mobile-card"));
-        cards.forEach((el, i) => {
-          gsap.fromTo(
-            el,
-            { y: 50, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.7,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: el,
-                scroller: getScroller(),
-                start: "top 80%",
-                once: true,
-                onEnter: () => {
-                  if (i === cards.length - 1) dispatchComplete();
-                },
-              },
-            }
-          );
-        });
-        if (cards.length === 0) dispatchComplete();
-        return () => {
-          const sc = getScroller();
-          if (sc instanceof HTMLElement) sc.classList.remove("no-snap");
-        };
-      }
-
+      // CSS-3D fold on all screens, phones included.
       // Desktop CSS-3D fold.
       gsap.set(".fold-stage", { transformPerspective: 1400 });
       gsap.set(".fold-left", { transformOrigin: "left center" });
@@ -150,7 +102,7 @@ export default function FoldedEnvelope() {
       const sc = getScroller();
       if (sc instanceof HTMLElement) sc.classList.remove("no-snap");
     };
-  }, [reduced, isMobile]);
+  }, [reduced]);
 
   if (reduced) {
     return (
@@ -163,38 +115,6 @@ export default function FoldedEnvelope() {
           </figcaption>
         </figure>
       </div>
-    );
-  }
-
-  if (isMobile) {
-    return (
-      <>
-        <div data-snap className="relative flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-cream px-6 py-16">
-          <div className="mobile-card grid w-full max-w-xs place-items-center rounded-sm bg-paper px-6 py-14 shadow-[0_24px_60px_rgba(42,38,34,0.25)]">
-            <span className="font-serif text-2xl tracking-[0.3em] opacity-40">BUWA</span>
-            <span className="mt-2 text-[11px] uppercase tracking-[0.25em] text-maroon">tied with love</span>
-          </div>
-          <p className="font-hand text-xl">A lifetime of love, folded in moments.</p>
-          <p className="text-[11px] font-semibold tracking-[0.3em] opacity-60">SCROLL ↓</p>
-        </div>
-        <div data-snap className="relative flex min-h-[100dvh] flex-col items-center justify-center gap-5 bg-cream px-6 py-16">
-          <div className="mobile-card w-full max-w-xs rounded-sm bg-[#EADFC6] p-6 text-center shadow-xl">
-            <FlowerIcon className="mx-auto h-8 w-8 text-maroon" />
-            <p className="mt-2 font-hand text-2xl">Dad — thank you for everything</p>
-          </div>
-          <div className="mobile-card w-full max-w-xs rounded-sm bg-[#E4D5B4] p-6 text-center shadow-xl">
-            <MountainIcon className="mx-auto h-8 w-8 opacity-60" />
-            <p className="mt-2 font-serif text-sm tracking-[0.25em] opacity-60">KUSHE AUNSI • 2083</p>
-          </div>
-        </div>
-        <div data-snap className="relative flex min-h-[100dvh] items-center justify-center bg-cream px-6 py-16">
-          <figure className="mobile-card polaroid tape w-full max-w-xs rotate-1 p-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="images/fold-final.jpg?v=2" alt="Open letter of gratitude for Buwa" className="h-auto w-full object-cover" />
-            <figcaption className="px-2 py-3 font-hand text-2xl">Same mountains, new dreams. Thank you, Buwa.</figcaption>
-          </figure>
-        </div>
-      </>
     );
   }
 
