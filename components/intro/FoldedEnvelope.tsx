@@ -57,9 +57,6 @@ export default function FoldedEnvelope() {
       // fold opens along the horizontal center crease instead of vertical.
       const phone = window.matchMedia("(max-width: 768px)").matches;
       gsap.set(".fold-stage", { transformPerspective: 1400 });
-      // Hide mirrored backs past 90° so flaps vanish cleanly instead of
-      // folding visibly back onto themselves.
-      gsap.set(".fold-flap", { backfaceVisibility: "hidden" });
       gsap.set(".fold-left", { transformOrigin: phone ? "center bottom" : "left center" });
       gsap.set(".fold-right", { transformOrigin: phone ? "center top" : "right center" });
       gsap.set(".fold-top", { transformOrigin: "center top" });
@@ -82,6 +79,7 @@ export default function FoldedEnvelope() {
 
       tl.to(".twine-path", { strokeDashoffset: 0, duration: 0.8, ease: "none" }, 0);
       tl.to(".twine-wrap", { opacity: 0, scale: 1.2, duration: 0.4 }, 0.7);
+      tl.to(".fold-cover", { opacity: 0, scale: 1.06, duration: 0.5, ease: "power2.out" }, 0.3);
       if (phone) {
         // Phones skip 3D entirely: top photo exits upward, bottom photo
         // exits downward (2D slide + fade), revealing the note layer;
@@ -164,6 +162,13 @@ export default function FoldedEnvelope() {
             <circle cx="100" cy="100" r="9" fill="#8C1D18" />
             <circle cx="100" cy="100" r="5" fill="#B1342B" />
           </svg>
+        </div>
+
+        {/* sealed cover: the closed letter seen at load, lifts first */}
+        <div className="fold-cover absolute inset-0 z-[18] flex flex-col items-center justify-center gap-3 rounded-sm bg-[#E9DCC0] shadow-[0_24px_60px_rgba(42,38,34,0.25)]">
+          <span className="font-serif text-3xl tracking-[0.35em] text-[#2A2622]/70">BUWA</span>
+          <span className="h-px w-12 bg-[#8C1D18]/60" aria-hidden />
+          <span className="font-serif text-[11px] tracking-[0.3em] text-[#2A2622]/50">KUSHE AUNSI • 2083</span>
         </div>
 
         {/* 4 flaps */}
