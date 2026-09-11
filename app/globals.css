@@ -105,3 +105,32 @@ body {
     scroll-snap-type: none;
   }
 }
+
+/* Phone-only rules (<=768px). Desktop untouched. */
+@media (max-width: 768px) {
+  /* Fold stage: photo flaps stack top/bottom instead of left/right.
+     Unlayered CSS beats Tailwind's layered utilities, so this wins. */
+  .fold-stage .fold-left {
+    top: 0;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+  }
+  .fold-stage .fold-right {
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+  }
+  /* Lock touch to vertical scrolling only — no sideways drift. */
+  html,
+  body,
+  .buwa-snap {
+    touch-action: pan-y;
+    overflow-x: hidden;
+  }
+}

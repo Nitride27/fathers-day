@@ -53,9 +53,12 @@ export default function FoldedEnvelope() {
 
       // CSS-3D fold on all screens, phones included.
       // Desktop CSS-3D fold.
+      // Phone stacks the photo flaps top/bottom (see globals.css), so the
+      // fold opens along the horizontal center crease instead of vertical.
+      const phone = window.matchMedia("(max-width: 768px)").matches;
       gsap.set(".fold-stage", { transformPerspective: 1400 });
-      gsap.set(".fold-left", { transformOrigin: "left center" });
-      gsap.set(".fold-right", { transformOrigin: "right center" });
+      gsap.set(".fold-left", { transformOrigin: phone ? "center bottom" : "left center" });
+      gsap.set(".fold-right", { transformOrigin: phone ? "center top" : "right center" });
       gsap.set(".fold-top", { transformOrigin: "center top" });
       gsap.set(".fold-bottom", { transformOrigin: "center bottom" });
 
@@ -76,19 +79,29 @@ export default function FoldedEnvelope() {
 
       tl.to(".twine-path", { strokeDashoffset: 0, duration: 0.8, ease: "none" }, 0);
       tl.to(".twine-wrap", { opacity: 0, scale: 1.2, duration: 0.4 }, 0.7);
-      tl.to(".fold-left", { rotationY: -155, duration: 1, ease: "power2.inOut" }, 0.8);
-      tl.to(".fold-right", { rotationY: 155, duration: 1, ease: "power2.inOut" }, 0.9);
-      tl.to(".fold-top", { rotationX: -150, duration: 1, ease: "power2.inOut" }, 1.6);
-      tl.to(".fold-bottom", { rotationX: 150, duration: 1, ease: "power2.inOut" }, 1.7);
+      if (phone) {
+        tl.to(".fold-left", { rotationX: -150, duration: 1, ease: "power2.inOut" }, 0.8);
+        tl.to(".fold-right", { rotationX: 150, duration: 1, ease: "power2.inOut" }, 0.9);
+      } else {
+        tl.to(".fold-left", { rotationY: -155, duration: 1, ease: "power2.inOut" }, 0.8);
+        tl.to(".fold-right", { rotationY: 155, duration: 1, ease: "power2.inOut" }, 0.9);
+        tl.to(".fold-top", { rotationX: -150, duration: 1, ease: "power2.inOut" }, 1.6);
+        tl.to(".fold-bottom", { rotationX: 150, duration: 1, ease: "power2.inOut" }, 1.7);
+      }
+      // Phone reveals the note layer as the photos open, so the finale runs
+      // earlier than desktop (where the note flaps open mid-sequence).
+      const tFinal = phone ? 1.4 : 2.2;
+      const tFade = phone ? 1.9 : 2.4;
+      const tHint = phone ? 2.2 : 2.6;
       tl.fromTo(
         ".fold-final",
         { opacity: 0, scale: 0.85, rotationX: 8 },
         { opacity: 1, scale: 1, rotationX: 0, duration: 0.9, ease: "power2.out" },
-        2.2
+        tFinal
       );
-      tl.to(".fold-flap", { opacity: 0, duration: 0.5 }, 2.4);
-      tl.to(".fold-hint", { opacity: 0, duration: 0.3 }, 2.6);
-      tl.add(dispatchComplete, 2.9);
+      tl.to(".fold-flap", { opacity: 0, duration: 0.5 }, tFade);
+      tl.to(".fold-hint", { opacity: 0, duration: 0.3 }, tHint);
+      tl.add(dispatchComplete, tHint + 0.3);
 
       return () => {
         setSnap(false);
