@@ -69,18 +69,6 @@ export default function KusheAunsiBand() {
             Kushe Aunsi is a sacred day in Nepal when we remember and honor our fathers. It is a time
             to express gratitude, seek blessings, and celebrate their lifelong sacrifices.
           </p>
-          <div className="mt-6 flex gap-4">
-            <figure className="w-28 -rotate-3 bg-[#FFFDF6] p-1.5 pb-5 text-ink shadow-lg">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="images/memory-honesty.jpg?v=2" alt="Blessing a child with tika" loading="lazy" className="aspect-square w-full object-cover object-top" />
-              <figcaption className="px-1 pt-1.5 font-hand text-lg leading-none">Blessings</figcaption>
-            </figure>
-            <figure className="w-28 rotate-2 bg-[#FFFDF6] p-1.5 pb-5 text-ink shadow-lg">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="images/memory-first-day.jpg?v=2" alt="Father and son learning at home" loading="lazy" className="aspect-square w-full object-cover object-top" />
-              <figcaption className="px-1 pt-1.5 font-hand text-lg leading-none">First lessons</figcaption>
-            </figure>
-          </div>
         </div>
 
         <div className="relative overflow-hidden rounded-sm shadow-2xl">
