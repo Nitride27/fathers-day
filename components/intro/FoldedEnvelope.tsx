@@ -149,7 +149,7 @@ export default function FoldedEnvelope() {
       <div data-snap className="relative flex min-h-[100dvh] items-center justify-center bg-cream px-6">
         <figure className="polaroid tape max-w-md rotate-1 p-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="images/fold-final.jpg" alt="Open letter of gratitude for Buwa" className="h-auto w-full object-cover" />
+          <img src="images/fold-final.jpg?v=2" alt="Open letter of gratitude for Buwa" className="h-auto w-full object-cover" />
           <figcaption className="px-2 py-3 font-hand text-2xl text-ink">
             A lifetime of love, folded in moments.
           </figcaption>
@@ -189,7 +189,7 @@ export default function FoldedEnvelope() {
         {/* 4 flaps */}
         <div className="fold-flap fold-left fold-panel absolute inset-y-0 left-0 z-10 w-1/2 overflow-hidden rounded-sm bg-[#E7DCC3] shadow-xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="images/fold-panel-a.jpg" alt="" aria-hidden className="h-full w-full object-cover opacity-90" />
+          <img src="images/fold-panel-a.jpg?v=2" alt="" aria-hidden className="h-full w-full object-cover opacity-90" />
         </div>
         <div className="fold-flap fold-right fold-panel absolute inset-y-0 right-0 z-10 w-1/2 overflow-hidden rounded-sm bg-[#EFE3C8] shadow-xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -206,7 +206,7 @@ export default function FoldedEnvelope() {
         <figure className="fold-final absolute inset-0 z-0 grid place-items-center opacity-0">
           <div className="polaroid tape w-[86%] rotate-1 p-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="images/fold-final.jpg" alt="Open letter of gratitude for Buwa" className="h-auto w-full object-cover" />
+            <img src="images/fold-final.jpg?v=2" alt="Open letter of gratitude for Buwa" className="h-auto w-full object-cover" />
             <figcaption className="px-2 py-3 font-hand text-2xl">Same mountains, new dreams. Thank you, Buwa.</figcaption>
           </div>
         </figure>

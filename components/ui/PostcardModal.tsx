@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const W = 1200;
 const H = 800;
-const BG_SRC = "images/hero-mountains-v2.jpg";
+const BG_SRC = "images/hero-mountains-v2.jpg?v=2";
 const CREAM = "#F3EEE4";
 const INK = "#2A2622";
 const MAROON = "#8C1D18";

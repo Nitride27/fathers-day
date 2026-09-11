@@ -5,20 +5,28 @@ import { initGsap, getScroller } from "@/lib/gsapConfig";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { loadLocalMemories, type LocalMemory } from "@/lib/local-memories";
 
-const MEMORIES = [
-  { src: "images/memory-first-day.jpg", caption: "Quiet evenings at home", rotate: "-2deg", gradient: "from-sky-200 to-amber-100" },
-  { src: "images/memory-honesty.jpg", caption: "Blessings and lessons", rotate: "1.5deg", gradient: "from-amber-100 to-stone-300" },
-  { src: "images/memory-trips.jpg", caption: "Road trips together", rotate: "-1deg", gradient: "from-sky-300 to-emerald-100" },
-  { src: "images/memory-festivals.jpg", caption: "Festival nights", rotate: "2deg", gradient: "from-rose-200 to-amber-100" },
-  { src: "images/memory-hard-work.jpg", caption: "Working the fields", rotate: "-1.5deg", gradient: "from-amber-200 to-emerald-200" },
-  { src: "images/memory-simple-joys.jpg", caption: "Birthday celebrations", rotate: "1deg", gradient: "from-stone-200 to-sky-100" },
-  { src: "images/album-amma-buwa.jpg", caption: "Amma & Buwa", rotate: "-1deg", gradient: "from-amber-100 to-rose-200" },
-  { src: "images/album-dashain.jpg", caption: "Dashain tika", rotate: "2deg", gradient: "from-red-200 to-amber-100" },
-  { src: "images/album-at-rest.jpg", caption: "At rest", rotate: "-2deg", gradient: "from-stone-200 to-stone-300" },
-  { src: "images/album-walk.jpg", caption: "Out for a walk", rotate: "1.5deg", gradient: "from-emerald-100 to-sky-200" },
-  { src: "images/album-home.jpg", caption: "Home together", rotate: "-1.5deg", gradient: "from-amber-200 to-stone-200" },
-  { src: "images/album-heritage.jpg", caption: "Heritage day", rotate: "2deg", gradient: "from-stone-300 to-amber-100" },
-  { src: "images/album-farm.jpg", caption: "Farm adventures", rotate: "-2deg", gradient: "from-emerald-200 to-amber-200" },
+type MemoryCard = {
+  src: string;
+  caption: string;
+  rotate: string;
+  gradient: string;
+  pos?: string;
+};
+
+const MEMORIES: MemoryCard[] = [
+  { src: "images/memory-first-day.jpg?v=2", caption: "Quiet evenings at home", rotate: "-2deg", gradient: "from-sky-200 to-amber-100" },
+  { src: "images/memory-honesty.jpg?v=2", caption: "Blessings and lessons", rotate: "1.5deg", gradient: "from-amber-100 to-stone-300" },
+  { src: "images/memory-trips.jpg?v=2", caption: "Road trips together", rotate: "-1deg", gradient: "from-sky-300 to-emerald-100" },
+  { src: "images/memory-festivals.jpg?v=2", caption: "Festival nights", rotate: "2deg", gradient: "from-rose-200 to-amber-100" },
+  { src: "images/memory-hard-work.jpg?v=2", caption: "Working the fields", rotate: "-1.5deg", gradient: "from-amber-200 to-emerald-200" },
+  { src: "images/memory-simple-joys.jpg?v=2", caption: "Birthday celebrations", rotate: "1deg", gradient: "from-stone-200 to-sky-100" },
+  { src: "images/album-amma-buwa.jpg?v=2", caption: "Amma & Buwa", rotate: "-1deg", gradient: "from-amber-100 to-rose-200" },
+  { src: "images/album-dashain.jpg?v=2", caption: "Dashain tika", rotate: "2deg", gradient: "from-red-200 to-amber-100", pos: "object-top" },
+  { src: "images/album-at-rest.jpg?v=2", caption: "At rest", rotate: "-2deg", gradient: "from-stone-200 to-stone-300", pos: "object-top" },
+  { src: "images/album-walk.jpg?v=2", caption: "Out for a walk", rotate: "1.5deg", gradient: "from-emerald-100 to-sky-200" },
+  { src: "images/album-home.jpg?v=2", caption: "Home together", rotate: "-1.5deg", gradient: "from-amber-200 to-stone-200", pos: "object-top" },
+  { src: "images/album-heritage.jpg?v=2", caption: "Heritage day", rotate: "2deg", gradient: "from-stone-300 to-amber-100" },
+  { src: "images/album-farm.jpg?v=2", caption: "Farm adventures", rotate: "-2deg", gradient: "from-emerald-200 to-amber-200" },
 ];
 
 export default function MemoryWall() {
@@ -101,7 +109,7 @@ export default function MemoryWall() {
                   src={m.src}
                   alt={m.caption}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${m.pos ?? ""}`}
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
