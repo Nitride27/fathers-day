@@ -204,7 +204,7 @@ export default function FoldedEnvelope() {
         A lifetime of love, folded in moments.
       </p>
 
-      <div className="fold-stage relative h-[62vmin] w-[82vmin] max-w-[640px]">
+      <div className="fold-stage relative h-[64vmin] w-[90vmin] max-w-[880px]">
         {/* sealed base */}
         <div className="fold-sealed absolute inset-0 grid place-items-center rounded-sm bg-paper shadow-[0_24px_60px_rgba(42,38,34,0.25)]">
           <span className="font-serif text-2xl tracking-[0.3em] opacity-40">BUWA</span>
@@ -233,7 +233,7 @@ export default function FoldedEnvelope() {
         </div>
         <div className="fold-flap fold-right fold-panel absolute inset-y-0 right-0 z-10 w-1/2 overflow-hidden rounded-sm bg-[#EFE3C8] shadow-xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="images/fold-panel-b.jpg" alt="" aria-hidden className="h-full w-full object-cover object-top opacity-90" />
+          <img src="images/fold-panel-b.jpg" alt="" aria-hidden className="h-full w-full object-cover object-center opacity-90" />
         </div>
         <div className="fold-flap fold-top fold-panel absolute inset-x-0 top-0 z-10 flex h-1/2 flex-col items-center justify-center gap-2 overflow-hidden bg-[#EADFC6] px-6 text-center">
           <FlowerIcon className="h-8 w-8 text-maroon" />
