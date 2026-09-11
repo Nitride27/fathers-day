@@ -3,7 +3,6 @@
 import { useLayoutEffect, useRef } from "react";
 import { getScroller, initGsap } from "@/lib/gsapConfig";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { FlowerIcon, MountainIcon } from "@/components/ui/EphemeraIcons";
 
 const EVENT = "buwa:intro-complete";
 
@@ -173,12 +172,9 @@ export default function FoldedEnvelope() {
           <img src="images/fold-panel-b.jpg" alt="" aria-hidden className="h-full w-full object-cover object-center opacity-90" />
         </div>
         <div className="fold-flap fold-top fold-panel absolute inset-x-0 top-0 z-10 flex h-1/2 flex-col items-center justify-center gap-2 overflow-hidden bg-[#EADFC6] px-6 text-center">
-          <FlowerIcon className="h-8 w-8 text-maroon" />
           <span className="font-hand text-2xl md:text-3xl">Dad — thank you for everything</span>
-          <span className="text-[10px] uppercase tracking-[0.3em] opacity-50">folded with love</span>
         </div>
         <div className="fold-flap fold-bottom fold-panel absolute inset-x-0 bottom-0 z-10 flex h-1/2 flex-col items-center justify-center gap-2 overflow-hidden bg-[#E4D5B4] px-6 text-center">
-          <MountainIcon className="h-8 w-8 opacity-60" />
           <span className="font-serif text-sm tracking-[0.25em] opacity-60">KUSHE AUNSI • 2083</span>
         </div>
 
