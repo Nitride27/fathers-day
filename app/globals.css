@@ -126,6 +126,12 @@ body {
     width: auto;
     height: auto;
   }
+  /* Smaller stage on phones so the outward 3D swing stays inside the
+     viewport instead of getting clipped (which read as "folding unseen"). */
+  .fold-stage {
+    width: 78vmin;
+    height: 58vmin;
+  }
   /* Lock touch to vertical scrolling only — no sideways drift. */
   html,
   body,

@@ -57,6 +57,9 @@ export default function FoldedEnvelope() {
       // fold opens along the horizontal center crease instead of vertical.
       const phone = window.matchMedia("(max-width: 768px)").matches;
       gsap.set(".fold-stage", { transformPerspective: 1400 });
+      // Hide mirrored backs past 90° so flaps vanish cleanly instead of
+      // folding visibly back onto themselves.
+      gsap.set(".fold-flap", { backfaceVisibility: "hidden" });
       gsap.set(".fold-left", { transformOrigin: phone ? "center bottom" : "left center" });
       gsap.set(".fold-right", { transformOrigin: phone ? "center top" : "right center" });
       gsap.set(".fold-top", { transformOrigin: "center top" });

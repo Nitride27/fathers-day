@@ -69,7 +69,7 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="relative h-[70vh] min-h-[420px]" aria-label="Photo collage">
+        <div className="relative h-[70vh] min-h-[420px] max-md:h-[62vh] max-md:min-h-[360px]" aria-label="Photo collage">
           <figure className="parallax-slow polaroid tape absolute left-0 top-0 w-[62%] -rotate-2 p-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="images/hero-main.jpg"               alt="Father walking hand-in-hand with his young son" className="h-auto w-full bg-gradient-to-br from-sky-200 to-amber-100 object-cover" />
@@ -88,7 +88,7 @@ export default function Hero() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="images/hero-pagoda.jpg" alt="Pagoda temple draped in prayer flags" className="h-auto w-full bg-gradient-to-br from-emerald-200 to-stone-300 object-cover" />
           </figure>
-          <figure className="parallax-fast absolute bottom-0 left-[6%] w-[52%] rotate-1 bg-white p-2 shadow-xl">
+          <figure className="parallax-fast absolute bottom-0 left-[6%] w-[52%] rotate-1 bg-white p-2 shadow-xl max-md:bottom-[4%]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src="images/hero-mountains-v2.jpg?v=2" alt="Hilltop road above the valley" className="h-auto w-full bg-gradient-to-br from-sky-300 to-indigo-200 object-cover" />
           </figure>
