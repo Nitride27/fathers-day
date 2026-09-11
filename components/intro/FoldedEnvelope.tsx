@@ -69,10 +69,10 @@ export default function FoldedEnvelope() {
         scrollTrigger: {
           trigger: root.current,
           scroller: getScroller(),
-          start: phone ? "top bottom" : "top top",
-          end: phone ? "bottom top" : "+=250%",
+          start: "top top",
+          end: phone ? "+=150%" : "+=250%",
           scrub: 1,
-          pin: !phone,
+          pin: true,
           anticipatePin: 1,
           onLeave: dispatchComplete,
           onToggle: syncSnap,
@@ -167,11 +167,11 @@ export default function FoldedEnvelope() {
         </div>
 
         {/* 4 flaps */}
-        <div className="fold-flap fold-left fold-panel absolute inset-y-0 left-0 z-10 w-1/2 overflow-hidden rounded-sm bg-[#E7DCC3] shadow-xl">
+        <div className="fold-flap fold-left fold-panel absolute inset-y-0 left-0 z-[15] w-1/2 overflow-hidden rounded-sm bg-[#E7DCC3] shadow-xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="images/fold-panel-a.jpg?v=2" alt="" aria-hidden className="h-full w-full object-cover object-top opacity-90" />
         </div>
-        <div className="fold-flap fold-right fold-panel absolute inset-y-0 right-0 z-10 w-1/2 overflow-hidden rounded-sm bg-[#EFE3C8] shadow-xl">
+        <div className="fold-flap fold-right fold-panel absolute inset-y-0 right-0 z-[15] w-1/2 overflow-hidden rounded-sm bg-[#EFE3C8] shadow-xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="images/fold-panel-b.jpg" alt="" aria-hidden className="h-full w-full object-cover object-center opacity-90" />
         </div>
