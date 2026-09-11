@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: #f3eee4;
+  color: #2a2622;
+  overscroll-behavior-y: none;
+  overflow-x: clip; /* rotated polaroids must never cause sideways scroll on mobile */
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Snap wrapper owns scrolling so pinned intro + snap can coexist.
+   Each full-screen section fills the dynamic viewport on mobile. */
+.buwa-snap {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100dvh;
+}
+
+.buwa-snap > section,
+.buwa-snap > div[data-snap] {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100dvh;
+}
+
+/* While the intro pin is active the pin spacer contributes scroll
+   distance with no snap points — mandatory snap would yank the
+   scroller past it to Hero. FoldedEnvelope toggles this class. */
+.buwa-snap.no-snap {
+  scroll-snap-type: none;
+}
+
+/* Torn-paper edge helper (CSS-only fallback until real torn masks land).
+   Uses clip-path zigzag so sections read as deckled paper. */
+.torn-top {
+  clip-path: polygon(
+    0 14px, 3% 8px, 7% 13px, 12% 7px, 18% 12px, 24% 6px, 31% 11px,
+    38% 7px, 45% 12px, 52% 6px, 59% 11px, 66% 7px, 73% 12px, 80% 6px,
+    87% 11px, 93% 7px, 100% 12px, 100% 100%, 0 100%
+  );
+}
+
+.torn-both {
+  clip-path: polygon(
+    0 12px, 5% 6px, 10% 11px, 18% 5px, 26% 10px, 34% 5px, 42% 10px,
+    50% 5px, 58% 10px, 66% 5px, 74% 10px, 82% 5px, 90% 10px, 100% 6px,
+    100% calc(100% - 10px), 93% calc(100% - 5px), 86% calc(100% - 11px),
+    78% calc(100% - 5px), 68% calc(100% - 10px), 58% calc(100% - 5px),
+    48% calc(100% - 10px), 38% calc(100% - 5px), 28% calc(100% - 10px),
+    18% calc(100% - 5px), 8% calc(100% - 10px), 0 calc(100% - 5px)
+  );
+}
+
+.tape {
+  position: relative;
+}
+.tape::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 92px;
+  height: 26px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgba(233, 220, 190, 0.85);
+  box-shadow: 0 1px 3px rgba(42, 38, 34, 0.18);
+  border-left: 1px dashed rgba(42, 38, 34, 0.15);
+  border-right: 1px dashed rgba(42, 38, 34, 0.15);
+  z-index: 5;
+}
+
+.lined-paper {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27px,
+    rgba(140, 29, 24, 0.14) 27px,
+    rgba(140, 29, 24, 0.14) 28px
+  );
+}
+
+.polaroid {
+  background: #fffdf6;
+  box-shadow:
+    0 1px 2px rgba(42, 38, 34, 0.18),
+    0 12px 32px rgba(42, 38, 34, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .buwa-snap {
+    scroll-snap-type: none;
+  }
+}
