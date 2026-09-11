@@ -126,6 +126,12 @@ body {
     width: auto;
     height: auto;
   }
+  /* Phone stacking needs photo flaps above the note flaps (desktop relies
+     on DOM order instead, so this stays phone-only). */
+  .fold-stage .fold-left,
+  .fold-stage .fold-right {
+    z-index: 15;
+  }
   /* Smaller stage on phones so the outward 3D swing stays inside the
      viewport instead of getting clipped (which read as "folding unseen"). */
   .fold-stage {

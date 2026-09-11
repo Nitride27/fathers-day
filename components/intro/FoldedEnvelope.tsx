@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { getScroller, initGsap } from "@/lib/gsapConfig";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { FlowerIcon } from "@/components/ui/EphemeraIcons";
 
 const EVENT = "buwa:intro-complete";
 
@@ -78,6 +79,7 @@ export default function FoldedEnvelope() {
 
       tl.to(".twine-path", { strokeDashoffset: 0, duration: 0.8, ease: "none" }, 0);
       tl.to(".twine-wrap", { opacity: 0, scale: 1.2, duration: 0.4 }, 0.7);
+      tl.to(".fold-cover", { opacity: 0, scale: 1.05, duration: 0.5, ease: "power2.out" }, 0.3);
       if (phone) {
         // Phones skip 3D entirely: top photo exits upward, bottom photo
         // exits downward (2D slide + fade), revealing the note layer;
@@ -160,6 +162,17 @@ export default function FoldedEnvelope() {
             <circle cx="100" cy="100" r="9" fill="#8C1D18" />
             <circle cx="100" cy="100" r="5" fill="#B1342B" />
           </svg>
+        </div>
+
+        {/* sealed gift-wrap cover: the closed letter seen at load.
+            Kraft tone + twine knot (z-20 above) + wax flower seal.
+            Lifts first; the photo flaps unfold inside-out beneath it. */}
+        <div className="fold-cover absolute inset-0 z-[19] flex flex-col items-center justify-center gap-3 rounded-sm bg-[#DCC79C] shadow-[0_24px_60px_rgba(42,38,34,0.25)] ring-1 ring-inset ring-[#2A2622]/10">
+          <span className="font-serif text-3xl tracking-[0.35em] text-[#2A2622]/75">BUWA.</span>
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-[#8C1D18] shadow-md" aria-hidden>
+            <FlowerIcon className="h-6 w-6 text-[#F3EEE4]" />
+          </span>
+          <span className="font-hand text-xl text-[#2A2622]/70">a gift for you</span>
         </div>
 
         {/* 4 flaps */}
